@@ -1,0 +1,2 @@
+class AnswerAttributesController < ApplicationController
+end
