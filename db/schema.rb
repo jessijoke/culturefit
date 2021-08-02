@@ -10,20 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_26_051356) do
+ActiveRecord::Schema.define(version: 2021_08_01_005740) do
 
   create_table "answer_attributes", force: :cascade do |t|
-    t.string "attribute"
-    t.integer "answer_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "answer_attribute"
+    t.string "quiz_answer_id"
   end
 
   create_table "quiz_answers", force: :cascade do |t|
     t.string "answer"
-    t.integer "question_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "quiz_question_id"
   end
 
   create_table "quiz_questions", force: :cascade do |t|
@@ -44,9 +44,9 @@ ActiveRecord::Schema.define(version: 2021_07_26_051356) do
     t.string "name"
     t.string "password_digest"
     t.string "email"
-    t.string "type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "user_type"
   end
 
 end
