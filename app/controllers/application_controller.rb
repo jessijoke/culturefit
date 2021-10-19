@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::API
-    before_action :authorized
+  include ::ActionController::Serialization
+    #before_action :authorized
   
     def encode_token(payload)
       # should store secret in env variable

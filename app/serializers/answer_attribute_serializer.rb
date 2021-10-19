@@ -1,4 +1,4 @@
-class AnswerAttributeSerializer
-    include JSONAPI::Serializer
-    attributes :attribute, :answer_id
+class AnswerAttributeSerializer < ActiveModel::Serializer
+    #include JSONAPI::Serializer
+    #attributes :attribute, :answer_id
 end

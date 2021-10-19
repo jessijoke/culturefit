@@ -1,7 +1,8 @@
 class QuizQuestionsController < ApplicationController
     def index
         quiz_questions = QuizQuestion.all
-        render json: QuizQuestionSerializer.new(quiz_questions)
+        #render json: QuizQuestionSerializer.new(quiz_questions)
+        render json: quiz_questions
     end
 
     def show
