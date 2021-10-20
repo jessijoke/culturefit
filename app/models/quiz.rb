@@ -33,10 +33,13 @@ class Quiz < ApplicationRecord
             hash[:answers] = {}
             question = self.quiz_questions.find{ |q| q.id == hash[:question_id]}
             question.quiz_answers.each.with_index(1) do |answer, index|
+                answer_attribute = answer.answer_attributes.find { |a| a.id == answer.id }
                 hash[:answers][index] = {
                     answer_id: answer.id,
-                    answer_name: answer
+                    answer_name: answer,
+                    answer_attribute: answer_attribute
                 }
+                
             end
         end
 
