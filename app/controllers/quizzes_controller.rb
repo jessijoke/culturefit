@@ -18,17 +18,48 @@ class QuizzesController < ApplicationController
     end
 
     def create
-        quiz = Quiz.new(quiz_params)
+        user = User.find_by(name: quiz_params[:username])
+        quiz = Quiz.create(
+            quiz_name: quiz_params[:quizTitle],
+            user_id: user.id
+        )
+        #byebug
         if quiz.save
-            #render json: QuizSerializer.new(quiz)
+            quizID = quiz.id
+            quiz_params[:questions].each do |qObject|
+                question = Quiz_question.create(
+                    question: qObject.question,
+                    quiz_id: quizID
+                )
+            end
             render json: quiz
         else
             render json: { message: "Something went wrong." }
         end
+        
     end
 
     private
     def quiz_params
-        params.require(:quiz).permit(:quiz_name, :user_id)
+        params.permit(
+            :username,
+            :quizTitle,
+            :quiz,
+            questions: [
+                :question,
+                answers: [
+                    :answer,
+                    :attribute
+                ]
+            ]
+        )
     end
 end
+
+#questions: [
+#    :question,
+#    answers: [
+#        :answer,
+#        :attribute
+#    ]
+#]
