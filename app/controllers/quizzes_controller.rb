@@ -18,20 +18,41 @@ class QuizzesController < ApplicationController
     end
 
     def create
+        #puts quiz_params
         user = User.find_by(name: quiz_params[:username])
         quiz = Quiz.create(
             quiz_name: quiz_params[:quizTitle],
             user_id: user.id
         )
-        #byebug
         if quiz.save
             quizID = quiz.id
-            quiz_params[:questions].each do |qObject|
-                question = Quiz_question.create(
-                    question: qObject.question,
+            quizData = quiz_params[:questions]
+            #binding.pry
+            quizData.each do |qObject|
+                #binding.pry
+                nquestion = QuizQuestion.create(
+                    question: qObject[:question],
                     quiz_id: quizID
                 )
+                if nquestion.save
+                    questionID = nquestion.id
+                    #binding.pry
+                    qObject[:answers].each do |qAnswer|
+                        nanswer = QuizAnswer.create(
+                            answer: qAnswer[:answer],
+                            quiz_question_id: questionID
+                        )
+                        if nanswer.save
+                            answerID = nanswer.id
+                            nattribute = AnswerAttribute.create(
+                                answer_attribute: qAnswer[:attribute],
+                                quiz_answer_id: answerID
+                            )
+                        end
+                    end
+                end
             end
+
             render json: quiz
         else
             render json: { message: "Something went wrong." }
@@ -45,21 +66,13 @@ class QuizzesController < ApplicationController
             :username,
             :quizTitle,
             :quiz,
-            questions: [
-                :question,
-                answers: [
-                    :answer,
-                    :attribute
-                ]
+            questions: [ 
+                    :question,
+                    answers: [
+                        :answer,
+                        :attribute
+                    ]
             ]
         )
     end
 end
-
-#questions: [
-#    :question,
-#    answers: [
-#        :answer,
-#        :attribute
-#    ]
-#]

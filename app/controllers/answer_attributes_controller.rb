@@ -24,6 +24,6 @@ class AnswerAttributesController < ApplicationController
 
     private
     def answer_attribute_params
-        params.require(:answer_attribute_params).permit(:answer_attribute, :question_id)
+        params.permit(:answer_attribute, :question_id)
     end
 end

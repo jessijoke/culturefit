@@ -20,7 +20,7 @@ gem 'devise'
 gem 'devise-jwt'
 #gem 'fast_jsonapi'
 gem 'active_model_serializers'
-
+gem 'pry', '~> 0.13.1'
 
 
 # Use Active Storage variant
