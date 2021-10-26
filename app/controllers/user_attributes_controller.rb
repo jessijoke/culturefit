@@ -1,15 +1,12 @@
 class UserAttributesController < ApplicationController
     def index
         scores = UserAttribute.all
-        #render json: QuizSerializer.new(quizzes)
         render json: scores
     end
 
     def show
         scores = UserAttribute.find_by(id: params[:id])
         if (scores)
-            #options[:include] = [:'quiz_name.quiz_questions', :'quiz_name.quiz_questions.quiz_answers']
-            #render json: QuizSerializer.new(quiz, options)
             render json: scores
         else
             render json: { message: 'Quiz not found.'}
