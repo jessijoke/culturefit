@@ -1,4 +1,4 @@
 class AnswerAttributeSerializer < ActiveModel::Serializer
-    #include JSONAPI::Serializer
-    #attributes :attribute, :answer_id
+    attributes :id, :answer_attribute
+    belongs_to :quiz_answer
 end

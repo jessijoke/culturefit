@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :user_attributes
   get 'private/test'
   get '/current_user', to: 'current_user#index'
   resources :answer_attributes

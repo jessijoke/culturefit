@@ -9,8 +9,6 @@ class QuizzesController < ApplicationController
     def show
         quiz = Quiz.find_by(id: params[:id])
         if (quiz)
-            #options[:include] = [:'quiz_name.quiz_questions', :'quiz_name.quiz_questions.quiz_answers']
-            #render json: QuizSerializer.new(quiz, options)
             render json: quiz
         else
             render json: { message: 'Quiz not found.'}
@@ -27,16 +25,13 @@ class QuizzesController < ApplicationController
         if quiz.save
             quizID = quiz.id
             quizData = quiz_params[:questions]
-            #binding.pry
             quizData.each do |qObject|
-                #binding.pry
                 nquestion = QuizQuestion.create(
                     question: qObject[:question],
                     quiz_id: quizID
                 )
                 if nquestion.save
                     questionID = nquestion.id
-                    #binding.pry
                     qObject[:answers].each do |qAnswer|
                         nanswer = QuizAnswer.create(
                             answer: qAnswer[:answer],

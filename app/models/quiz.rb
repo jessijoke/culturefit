@@ -2,6 +2,7 @@ class Quiz < ApplicationRecord
     belongs_to :user
     validates :quiz_name, uniqueness: true
     has_many :quiz_questions
+    has_many :user_attributes
 
     def get_answers
         self.quiz_questions.map do |question|
