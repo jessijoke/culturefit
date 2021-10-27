@@ -1,6 +1,12 @@
 class UserAttributesController < ApplicationController
     def index
         scores = UserAttribute.all
+        #scores = UserAttribute.group(:quiz_id)
+        render json: scores
+    end
+
+    def unique_elements
+        scores = UserAttribute.group(:quiz_id)
         render json: scores
     end
 
@@ -14,9 +20,9 @@ class UserAttributesController < ApplicationController
     end
 
     def create
-        
+        #byebug
         user = User.find_by(name: score_params[:name])
-        score_params[:userscore].each do |object|
+        score_params[:userScore].each do |object|
             #byebug
             newScore = UserAttribute.create(
                 user_id: user.id,
@@ -24,7 +30,11 @@ class UserAttributesController < ApplicationController
                 quiz_id: score_params[:quizID],
                 score: object[:score]
             )
-            newScore.save!
+            if newScore.save
+                print "IT WORKED"
+            else
+                print "Nope"
+            end
         end
         render json: user
     end
@@ -34,7 +44,7 @@ class UserAttributesController < ApplicationController
         params.permit(
             :name,
             :quizID,
-            userscore: [ 
+            userScore: [ 
                 :attr,
                 :score
              ]
