@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-    #skip_before_action :authorized, only: [:create, :login]
+    skip_before_action :authorized, only: [:create, :login]
     before_action :authorized, only: [:auto_login]
 
     def index
@@ -23,7 +23,7 @@ class UsersController < ApplicationController
         if @user.valid?
           @token = encode_token(user_id: @user.id)
           #render json: { user: UserSerializer.new(@user), jwt: @token }, status: :created
-          render json: @user
+          render json: { user: @user, jwt: @token }
         else
           render json: { error: 'failed to create user' }, status: :not_acceptable
         end
@@ -34,8 +34,7 @@ class UsersController < ApplicationController
 
         if @user && @user.authenticate(params[:password])
             token = encode_token({user_id: @user.id})
-            #render json: { user: UserSerializer.new(@user), jwt: @token }
-            render json: { user: @user, jwt: @token }
+            render json: { user: @user, jwt: token }
         else
             render json: {error: "Sorry, we couldn't find an account with those credentials. Please try again."}
         end

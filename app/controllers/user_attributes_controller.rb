@@ -10,8 +10,12 @@ class UserAttributesController < ApplicationController
         render json: scores
     end
 
+    def scores_by_quiz
+        #scores = UserAttribute.group(quiz_id: params[:id])
+    end
+
     def show
-        scores = UserAttribute.find_by(id: params[:id])
+        scores = UserAttribute.where(quiz_id: params[:id])
         if (scores)
             render json: scores
         else
