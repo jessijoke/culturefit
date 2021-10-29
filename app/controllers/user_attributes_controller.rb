@@ -10,14 +10,19 @@ class UserAttributesController < ApplicationController
         render json: scores
     end
 
-    def scores_by_quiz
-        #scores = UserAttribute.group(quiz_id: params[:id])
-    end
-
     def show
         scores = UserAttribute.where(quiz_id: params[:id])
+        scoresByQuiz = {}
+        scores.each do |score|
+            scoresByQuiz[score.user_id] = {
+                user_id: User.find_by(id: score.user_id)
+            }
+        end
+        scores.each do |score|
+            scoresByQuiz[score.user_id][score.attr] = score.score
+        end
         if (scores)
-            render json: scores
+            render json: scoresByQuiz
         else
             render json: { message: 'Quiz not found.'}
         end
