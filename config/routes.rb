@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :messages
   get 'private/test'
   get '/current_user', to: 'current_user#index'
   get '/user_attributes/unique', to: 'user_attributes#unique_elements'
