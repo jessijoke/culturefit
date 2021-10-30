@@ -16,7 +16,6 @@ class QuizzesController < ApplicationController
     end
 
     def create
-        #puts quiz_params
         user = User.find_by(name: quiz_params[:username])
         quiz = Quiz.create(
             quiz_name: quiz_params[:quizTitle],
