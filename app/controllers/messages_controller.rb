@@ -1,7 +1,6 @@
 class MessagesController < ApplicationController
     def index
         messages = Message.all.last(10)
-        #render json: QuizSerializer.new(quizzes)
         render json: messages
     end
 
@@ -15,7 +14,6 @@ class MessagesController < ApplicationController
     end
 
     def create
-        #byebug
         user = User.find_by(name: message_params[:user])
         message = Message.create(user_id: user.id, message: message_params[:message])
         if message.save
