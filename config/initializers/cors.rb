@@ -8,6 +8,8 @@
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
     origins 'https://jessijoke.github.io/culturefit-front/'
+    #origins '*'
+    ##For testing ^^
 
     resource '*',
       headers: :any,
