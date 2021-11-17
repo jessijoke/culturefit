@@ -9,6 +9,6 @@ Rails.application.routes.draw do
   resources :user_attributes
   post "/login", to: "users#login"
   get '/current_user', to: 'current_user#index'
-  get '/user_attributes/unique', to: 'user_attributes#unique_elements'
+  get '/user_attributes/unique', :to => 'user_attributes#unique_elements'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
