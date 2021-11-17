@@ -6,7 +6,7 @@ class UserAttributesController < ApplicationController
     end
 
     def unique_elements
-        scores = UserAttribute.group(:quiz_id)
+        scores = UserAttribute.all.group(:quiz_id)
         render json: scores
     end
 
