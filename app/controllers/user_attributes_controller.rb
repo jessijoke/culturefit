@@ -12,8 +12,14 @@ class UserAttributesController < ApplicationController
         #scores = UserAttribute.all.group(:quiz_id)
         #scores = UserAttribute.distinct(:quiz_id)
         #scores = UserAttribute.all.select(:quiz_id).group(:quiz_id)
-        scores = UserAttribute.joins(:quizzes).select(:quiz_id).group(:quiz_id)
-        render json: scores
+        scores = UserAttribute.all
+        uniqueScores = {}
+        scores.each do |score|
+            if !uniqueScores.key?(score.quiz_id)
+                uniqueScores[score.quiz_id] = score
+            end
+        end
+        render json: uniqueScores
         #render json: { message: "Something went wrong." }
     end
 
