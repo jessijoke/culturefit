@@ -6,7 +6,7 @@ class UserAttributesController < ApplicationController
     end
 
     def unique
-        scores = UserAttribute.group(:quiz.id)
+        scores = UserAttribute.group(:quiz_id)
         #scores = UserAttribute.select(:quiz_id).distinct
         #scores = UserAttribute.all
         render json: scores
