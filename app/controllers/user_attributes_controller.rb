@@ -10,7 +10,7 @@ class UserAttributesController < ApplicationController
         #scores = UserAttribute.select(:quiz_id).distinct
         #scores = UserAttribute.all
         #render json: scores
-        render json: { message: "Something went wrong." }
+        render json: { message: "Something went wrong." }, serializer: nil
     end
 
     def show
