@@ -6,11 +6,11 @@ class UserAttributesController < ApplicationController
     end
 
     def unique
-        scores = UserAttribute.group(:quiz.id)
+        #scores = UserAttribute.group(:quiz.id)
         #scores = UserAttribute.select(:quiz_id).distinct
         #scores = UserAttribute.all
-        render json: scores
-        #render json: { message: "Something went wrong." }, serializer: nil
+        #render json: scores
+        render json: { message: "Something went wrong." }, serializer: nil
     end
 
     def show
