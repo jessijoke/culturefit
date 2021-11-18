@@ -8,7 +8,8 @@ class UserAttributesController < ApplicationController
     def unique
         #scores = UserAttribute.group(:quiz_id)
         #scores = UserAttribute.select(:quiz_id).distinct
-        scores = UserAttribute.all
+        #scores = UserAttribute.all
+        scores = UserAttribute.select(:quiz_id).distinct
         render json: scores
         #render json: { message: "Something went wrong." }
     end
